@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Design Response - Architecture Redefined</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navbar Styles */
+  .navbar {
+  display: flex;
+  justify-content: center; /* Center the content */
+  align-items: center;
+  padding: 15px 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.menu-icon {
+  margin-left: auto; /* Pushes the menu-icon to the far right */
+  padding: 5px 30px;
+}
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .logo-img {
+      width: 155px;
+      height: auto;
+      margin-right:0px;
+    }
+
+    .menu-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .line {
+      width: 30px;
+      height: 3px;
+      background: #fff;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 60px;
+      right: 40px;
+      background: #222;
+      list-style: none;
+      padding: 10px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      margin: 10px 0;
+    }
+
+    .dropdown-menu a {
+      color: #fff;
+      font-size: 1rem;
+      padding: 5px 10px;
+      display: block;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #00e0ff;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJtb43FoKrOppZ4gr6TSFDkFbZDWoqbv3DP4vtQqoY2QMwZX3Dcg3efpU&s=10');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      padding: 0 10px;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-family: 'Courier New', Courier, monospace;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px #4169e1;
+    }
+
+.cta-button {
+  background: #00e0ff;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRAOVuOnxchBshdVMBxQzLwVPt0HYT4TtYcfq2cumhGMIEe6KDyu-1mBc&s=10') no-repeat center center/cover;
+}
+
+    .cta-button:hover {
+      background: #0075a9;
+    }
+
+    /* Hide class */
+    .hide {
+      display: none;
+    }
+
+    /* Studio Section */
+    .section {
+      padding: 60px 20px;
+      margin-top: 5px;
+      display: none; /* Hide all sections initially */
+    }
+
+    .show-section {
+      display: block; /* Show the section when active */
+    }
+
+    .studio h2, .portfolio h2, .contact h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+/* About Us Section Styling */
+#about-us {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #1b1f3b, #2c3e50); /* Dark gradient with blueish tones */
+  color: #fff;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+#about-us h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #f8f8f8;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#about-us p {
+  font-size: 1.2rem;
+  color: #d1d1d1;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+#about-us .philosophy, .key-figures {
+  margin-top: 50px;
+}
+
+#about-us .philosophy h3, #about-us .key-figures h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ffffff; 
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+#about-us .philosophy ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#about-us .philosophy li {
+  font-size: 1.1rem;
+  color: #d1d1d1;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+#about-us .key-figures .architects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+
+#about-us .key-figures .architect {
+  background: #4f5a71; /* Darker blue-gray background */
+  border-radius: 10px;
+  padding: 30px;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+#about-us .key-figures .architect:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+#about-us .key-figures .architect img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+#about-us .key-figures .architect-details h4 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+#about-us .key-figures .architect-details p {
+  font-size: 1rem;
+  color: #d1d1d1;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #about-us h2 {
+    font-size: 2.5rem;
+  }
+
+  #about-us .key-figures .architect {
+    width: 100%;
+    padding: 20px;
+  }
+
+  #about-us .key-figures .architect img {
+    width: 80%;
+  }
+}
+
+
+/* Portfolio Categories */
+.portfolio-categories {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.category-card {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #00e0ff;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.category-card:hover {
+  background: #00e0ff;
+  color: #121212;
+  transform: scale(1.1);
+}
+
+/* Projects Grid */
+.projects-grid {
+  margin-top: 30px;
+}
+
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+}
+
+.project-card .overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Modal for Project Details */
+.project-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modal-content {
+  background: #222;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 800px;
+  text-align: center;
+  color: #fff;
+}
+
+.project-carousel {
+  display: flex;
+  overflow-x: scroll;
+  gap: 10px;
+}
+
+.project-carousel img {
+  width: 100%;
+  max-height: 400px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+                form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin: 10px 0 5px;
+        }
+
+        form input,
+        form textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #555;
+        }
+
+.social-media {
+            margin-top: 10px;
+        }
+
+ .social-media a {
+            margin: 0 5px;
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+
+footer {
+    text-align: center;
+    padding: 1px;
+    background-color: #000000;
+    color: white;
+}
+
+.background-image {
+    background-image: url("images/bk.jpg"); /* URL of the image */
+    background-size: cover; /* Scales the image to cover the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    width: 100%; /* Set the width as needed */
+    height: 300px; /* Set the height as needed */
+     overflow-y: auto; /* Add scrolling if content exceeds height */
+}
+
+
+#testimonials {
+  text-align: center;
+  color: #ffffff; /* Example color to contrast with the background */
+  padding: 20px;
+  margin: auto;
+}
+
+#reviewsSection {
+  margin-top: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between testimonials */
+}
+
+.testimonial {
+  border-left: 4px solid #3498db; /* Example green border */
+  background: rgba(255, 255, 255, 0.05); /* Semi-transparent background */
+  color: #fff;
+  bordborder-radius: 5px;
+  padding: 10px 15px;
+  text-align: left;
+  font-style: italic;
+}
+
+
+.testimonial p {
+  font-size: 1.2em;
+}
+
+.testimonial strong {
+  display: block;
+  text-align: right;
+  margin-top: 10px;
+}
+
+/* General Section Styling for #services */
+#services {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #1d1d1d, #343434); /* Dark gradient background */
+  color: #fff;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+#services .services-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #f8f8f8;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+#services .services-title::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 70px;
+  height: 4px;
+  background-color: #ff6f61; /* Accent color */
+  border-radius: 5px;
+}
+
+/* Grid Layout for Service Cards */
+#services .services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+  justify-items: center;
+}
+
+/* Individual Service Card Styling */
+#services .service-card {
+  background: linear-gradient(145deg, #4e5d6e, #2b3543); /* Gradient background for each card */
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease;
+  width: 90%;
+  max-width: 350px;
+  position: relative;
+  overflow: hidden;
+}
+
+#services .service-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(145deg, #ff6f61, #4e5d6e); /* Accent gradient on hover */
+}
+
+/* Service Icon Styling */
+#services .service-icon {
+  background-color: #ff6f61; /* Accent color */
+  border-radius: 50%;
+  padding: 20px;
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+#services .service-card:hover .service-icon {
+  transform: scale(1.1);
+}
+
+/* Service Title and Description Styling */
+#services .service-card h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+#services .service-card p {
+  font-size: 1.1rem;
+  color: #d1d1d1;
+  line-height: 1.6;
+  margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+/* Hover Effect on Text */
+#services .service-card:hover p {
+  color: #f8f8f8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #services .services-title {
+    font-size: 2.5rem;
+  }
+
+  #services .service-card {
+    padding: 30px;
+  }
+
+  #services .service-icon {
+    font-size: 2rem;
+    padding: 15px;
+  }
+
+  #services .service-card h3 {
+    font-size: 1.4rem;
+  }
+
+  #services .service-card p {
+    font-size: 1rem;
+  }
+}
+
+/* Careers Section - Dark Sleek Modern Design */
+/* Careers Section - Dark Theme Styling */
+#careers {
+  background-color: #121212; /* Deep dark background */
+  color: #e0e0e0;
+  padding: 80px 20px;
+  font-family: 'Helvetica Neue', sans-serif;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+#careers h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 3px solid #007bff; /* Accent blue underline */
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+#careers p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: #bbb;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#careers h3 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+#careers ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+#careers ul li {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+
+.job-listings {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.job-opening {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+
+.job-opening:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.job-opening h4 {
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.job-opening p {
+  font-size: 1rem;
+  color: #bbb;
+  margin-bottom: 15px;
+}
+
+.apply-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.apply-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.testimonials {
+  background-color: #1f1f1f;
+  padding: 40px 20px;
+  margin-top: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.testimonials p {
+  font-size: 1.2rem;
+  color: #bbb;
+  font-style: italic;
+}
+
+.testimonials .name {
+  font-size: 1.1rem;
+  color: #007bff;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.contact-info {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-top: 30px;
+}
+
+.contact-info a {
+  color: #007bff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  color: #0056b3;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  #careers h2 {
+    font-size: 2.5rem;
+  }
+
+  #careers p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  #careers h3 {
+    font-size: 1.6rem;
+  }
+
+  .job-listings {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .job-opening {
+    width: 90%;
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="images/image.png" alt="Design Response Logo" class="logo-img">
+      </div>
+      <div class="menu-icon" onclick="toggleMenu()">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <ul class="dropdown-menu" id="dropdown-menu">
+        <li><a href="javascript:void(0)" onclick="showSection('about-us')">About Us</a></li>
+       <li><a href="javascript:void(0)" onclick="showSection('services')">Services</a></li>
+        <li><a href="javascript:void(0)" onclick="showSection('portfolio')">Portfolio</a></li>
+         <li><a href="javascript:void(0)" onclick="showSection('careers')">Careers/Join us</a></li>
+        <li><a href="javascript:void(0)" onclick="showSection('contact')">Get In touch</a></li>
+      </ul>
+    </nav>
+  
+  <header class="hero">
+  <br><br><br><br>
+    <div class="hero-content">
+      <h1 class="hero-title">Where architecture meets innovation</h1>
+      <p class="hero-subtitle">Creating spaces that inspire and endure.</p>
+      <br>
+    <a href="javascript:void(0)" onclick="showSection('portfolio')" class="cta-button">View Portfolio</a> 
+     
+     <br><br><br><br><br><br><br><br><br>
+     
+           <p>Welcome to DESIGN RESPONSE, where every project tells a story of innovation, sustainability, and exceptional design.</p>
+      
+      <p> Office Address: 9, Acon Premia-II, Happy Enclave, Canal road, Dehradun-248001 </p> 
+      
+    </div>
+  </header>
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Home Section (Initial view) -->
+    <section id="home" class="section home show-section">
+
+<section id="awards" class="awards-section">
+  <div class="container">
+    <h2>Awards & Recognitions</h2>
+    <p>Our commitment to architectural excellence has been recognized by numerous prestigious awards and features in industry-leading publications.</p>
+    <div class="awards-grid">
+      <div class="award">
+        <img src=".png" alt="Award 1">
+      </div>
+    </div>
+    <p class="more-info"><a href="#awards-details">View All Awards & Mentions</a></p>
+  </div>
+</section>
+
+      
+          <div class="background-image">
+  <section id="testimonials">
+    <h2>Client Testimonials/Reviews</h2>
+
+    <!-- Reviews Section (will be dynamically populated from Firestore) -->
+    <div id="reviewsSection">
+      <!-- Initial example testimonials -->
+      <div class="testimonial">
+        <p>It was very nice working with design response.They are very professional and their designs are stunning.!</p>
+        <strong>- Walter Mitty</strong>
+      </div>
+      <div class="testimonial">
+        <p>Strongly recommend for Comprehensive Architectural Services..</p>
+        <strong>- Ramesh Joshi</strong>
+      </div>
+ <div class="testimonial">
+        <p>I have had the opportunity to collaborate with Design Response Architecture on a couple of projects and I highly recommend their services! </p>
+        <strong>- Arvin</strong>
+      </div>
+    </div>
+
+
+  </section>
+</div>
+      
+      
+    </section>
+
+<!-- About Us Section -->
+<section id="about-us" class="section studio">
+  <h2>About Our Studio</h2>
+  <p>
+    At DESIGN RESPONSE, we believe architecture is more than just buildings; it's about crafting environments that enrich lives. With a diverse portfolio encompassing residential, commercial, institutional, and hospitality projects, as well as urban design, exhibition spaces, interiors, and landscaping, we are dedicated to pushing the boundaries of architectural excellence.
+    <br><br>
+    Led by architects, Udayan and Akshay, our firm brings together a passionate team of over 15 in-house professionals, including architects, civil engineers, and site engineers. Supported by a network of over 20 consultants and associates, we collaborate closely to realise our vision of sustainable, contextually sensitive design.
+    <br><br>
+    At DESIGN RESPONSE, every project is a testament to our commitment to innovation and client-centric solutions. Whether creating timeless residences or dynamic commercial spaces, we integrate cutting-edge design with a deep understanding of local context and environmental sustainability. Explore our portfolio and discover how we transform ideas into extraordinary built environments.
+  </p>
+
+  <!-- Philosophy Section -->
+  <div class="philosophy">
+    <h3>Our Philosophy</h3>
+    <p>
+      At DESIGN RESPONSE, architecture is not just about creating structures; it's about shaping experiences and fostering connections. We believe in the power of design to transform lives and elevate communities. Our philosophy is rooted in three core principles:
+    </p>
+    <ul>
+      <li><strong>Innovation:</strong> We embrace innovation as a catalyst for creating spaces that are not only functional but also inspirational. Through continuous exploration and experimentation, we push the boundaries of architectural possibility.</li>
+      <li><strong>Sustainability:</strong> We are committed to sustainable design practices that minimise environmental impact and maximise efficiency. From energy-efficient buildings to eco-friendly materials, we integrate sustainability into every aspect of our projects.</li>
+      <li><strong>Contextual Sensitivity:</strong> Understanding the unique context of each project is fundamental to our approach. By respecting local culture, history, and environment, we create architecture that harmonises seamlessly with its surroundings.</li>
+    </ul>
+  </div>
+
+  <!-- Key Architects Section -->
+  <div class="key-figures">
+    <h3>Principle Architects</h3>
+    <div class="architects">
+      <div class="architect">
+        <img src="images/udayan.jpg" alt="Udayan" class="architect-image">
+        <div class="architect-details">
+          <h4>Udayan</h4>
+          <p>
+Udayan is a visionary architect and the Director of Design Response, with an impressive career spanning over 28 years in the field of architecture. An alumnus of IIT Roorkee and GCA Lucknow, Udayan has consistently pushed the boundaries of design and innovation. His deep-rooted expertise in hospitality and large-scale residential developments has earned him a distinguished reputation across Uttarakhand and beyond.
+<br>
+Over the years, Udayan has successfully led the design and execution of numerous high-profile projects, including luxury 5-star hotels, institutional buildings, and expansive group housing projects. His work exemplifies a harmonious blend of aesthetics, functionality, and sustainability, ensuring that each project enhances the built environment while meeting client and user needs.
+<br>
+With a commitment to delivering excellence, Udayan continues to shape the architectural landscape, creating spaces that inspire and enrich the lives of their inhabitants.
+          </p>
+        </div>
+      </div>
+
+      <div class="architect">
+        <img src="images/akshay.jpg" alt="Akshay" class="architect-image">
+        <div class="architect-details">
+          <h4>Akshay</h4>
+          <p>
+Akshay Agarwal is an architect and Director at Design Response, with a decade of experience in the field. A graduate of GCA Lucknow, Akshay has a passion for cultural heritage and modern design, which is reflected in his innovative approach to architecture. He further honed his skills by participating in a prestigious summer school at Universität Tübingen, Germany, where he explored global perspectives on Smart cities.
+<br><br>
+In addition to his architectural expertise, Akshay is a co-author of the book "Walking with Laata," which delves into the rich culture and heritage of the Doon Valley. His dedication to preserving the historical essence of the region, while integrating contemporary design practices, sets him apart as a thought leader in the field.
+<br><br>
+At Design Response, Akshay combines his love for heritage with his forward-thinking design approach, ensuring that each project not only meets functional needs but also resonates with the cultural context of its environment. His work continues to contribute to the evolving architectural narrative of Uttarakhand and beyond.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+   
+ <section id="services" class="section services">
+  <h2 class="services-title">Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-pencil-ruler"></i>
+      </div>
+      <h3>Architectural Design</h3>
+      <p>Innovative designs that blend aesthetics and functionality to create unique spaces.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-city"></i>
+      </div>
+      <h3>Master Planning</h3>
+      <p>Planning large-scale urban environments with a focus on sustainability and community.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-cogs"></i>
+      </div>
+      <h3>Interior Design</h3>
+      <p>Designing functional, modern interiors that reflect style and comfort.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-sync-alt"></i>
+      </div>
+      <h3>Renovation & Restoration</h3>
+      <p>Restoring historical buildings while integrating modern features for longevity.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-leaf"></i>
+      </div>
+      <h3>Sustainable Design</h3>
+      <p>Eco-friendly solutions that reduce energy consumption and promote green living.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-tools"></i>
+      </div>
+      <h3>Project Management</h3>
+      <p>Efficient and effective project management to ensure timely and cost-effective execution.</p>
+    </div>
+  </div>
+</section>
+    
+<!-- Careers Section -->
+<section id="careers" class="section careers">
+  <h2>Join Our Team</h2>
+    <p>At DESIGN RESPONSE, we’re looking for passionate individuals who are ready to make a difference in the world of architecture. Explore opportunities to work with us and become a part of a dynamic, creative, and collaborative team.</p>
+    
+    <h3>Why Work With Us?</h3>
+    <ul>
+      <li>Innovative and Impactful Projects</li>
+      <li>Career Growth & Development Opportunities</li>
+      <li>Work-Life Balance</li>
+      <li>Diverse and Inclusive Team</li>
+    </ul>
+
+    <h3>Current Openings</h3>
+    <div class="job-listings">
+      <div class="job-opening">
+        <h4>Junior Architect</h4>
+        <p>Location: New York, NY | Type: Full-Time</p>
+        <p><strong>Responsibilities:</strong> Assist with the design and development of residential projects...</p>
+<a href="mailto:Designresponse.ddn@gmail.com?subject=Job Application: Junior Architect" class="apply-btn">Apply Now</a>
+      </div>
+      <!-- Repeat for other job listings -->
+    </div>
+    
+    <h3>How to Apply</h3>
+    <p>To apply, simply send your resume and portfolio to <a href="mailto:jobs@designresponse.com">Designresponse.ddn@gmail.com</a>.</p>
+    
+    <h3>Employee Testimonials</h3>
+    <p><em>"Working at DESIGN RESPONSE has been an incredible experience. The team is collaborative and passionate about pushing boundaries in architecture!" - John Doe, Senior Architect</em></p>
+    
+    <p class="contact-info">Have questions? Reach out to our HR team at <a href="mailto:hr@designresponse.com">hr@designresponse.com</a>.</p>
+  
+
+</section> 
+ 
+ 
+    
+    
+    
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="section portfolio">
+  <h2>Our Portfolio</h2>
+  <p>Explore our futuristic creations across diverse categories:</p>
+
+  <!-- Portfolio Categories -->
+  <div class="portfolio-categories">
+    <div class="category-card" onclick="showProjects('hospitals')">
+      <span>Hospitals</span>
+    </div>
+    <div class="category-card" onclick="showProjects('institutions')">
+      <span>Institutions</span>
+    </div>
+    <div class="category-card" onclick="showProjects('restaurants')">
+      <span>Restaurants</span>
+    </div>
+  </div>
+
+  <!-- Projects Grid (Initially Hidden) -->
+  <div id="projects-grid" class="projects-grid hide">
+    <h3 id="category-title"></h3>
+    <div id="projects-container" class="projects-container">
+      <!-- Project cards will be dynamically added here -->
+    </div>
+    <button class="cta-button" onclick="backToCategories()">Back to Categories</button>
+  </div>
+
+  </div>
+</section>
+
+
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="contact-container">
+    <!-- Contact Information -->
+    <div class="contact-details">
+      <h2>Contact Us</h2>
+      <p><strong>Address:</strong>Acon Premia, HAPPY ENCLAVE, Canal Rd, Dehradun, Uttarakhand 248195</p>
+      <p><strong>Email:</strong> 
+Designresponse.ddn@gmail.com</p>
+      <p><strong>Phone:</strong>+919319790322
+      <br>
+      +91 7506945773</p>
+    </div>
+
+    <!-- Google Map Box -->
+    <div class="map-box">
+      <iframe
+        src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Design response Acon Premia, HAPPY ENCLAVE, Canal Rd, Dehradun, Uttarakhand 248195&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+        width="100%"
+        height="300"
+        style="border:0;"
+        allowfullscreen=""
+        loading="fast"
+      ></iframe>
+    </div>
+  </div>
+    
+   
+      
+      
+      <br>
+"Reach Out directly for Collaboration,Feedback, or to Bring Your Architectural Ideas to Life!"
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+        <div class="social-media">
+            <h3>Find us on:</h3>
+           <a href="https://www.facebook.com/DesignResponce/" target="_blank"><i class="fab fa-facebook"></i></a>
+           
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Design Response. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+ <!-- JavaScript for Menu Toggle and Animations -->
+<script>
+  // Toggle the dropdown menu
+  function toggleMenu() {
+    const menu = document.getElementById('dropdown-menu');
+    menu.classList.toggle('show');
+  }
+
+  // Function to show the corresponding section and hide others
+  function showSection(sectionId) {
+    // Hide all sections first
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('show-section'));
+
+    // Hide the hero content and hero section
+    const heroContent = document.querySelector('.hero-content');
+    const heroSection = document.querySelector('.hero');
+    heroContent.classList.add('hide');
+    heroSection.classList.add('hide');
+
+    // Show the selected section
+    const selectedSection = document.getElementById(sectionId);
+    selectedSection.classList.add('show-section');
+    
+    // Close the dropdown menu when an option is clicked
+    const menu = document.getElementById('dropdown-menu');
+    menu.classList.remove('show');
+  }
+
+  // Close the dropdown if clicked outside
+  window.onclick = function(event) {
+    const menu = document.getElementById('dropdown-menu');
+    const menuIcon = document.querySelector('.menu-icon');
+    if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
+      menu.classList.remove('show');
+    }
+  };
+
+  // GSAP Animation for the Hero Section (Initial animation for the hero content)
+  gsap.from('.hero-title', { opacity: 0, y: -50, duration: 1 });
+  gsap.from('.cta-button', { opacity: 0, y: 50, delay: 1, duration: 1 });
+
+// Optional: Small hover effect for icons in service cards
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    const icon = card.querySelector('.service-icon');
+    icon.style.transform = 'scale(1.1)';
+    icon.style.transition = 'transform 0.3s ease';
+  });
+
+  card.addEventListener('mouseleave', () => {
+    const icon = card.querySelector('.service-icon');
+    icon.style.transform = 'scale(1)';
+  });
+});
+
+// Optional: Small hover effect for icons in service cards
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    const icon = card.querySelector('.service-icon');
+    icon.style.transform = 'scale(1.1)';
+    icon.style.transition = 'transform 0.3s ease';
+  });
+
+  card.addEventListener('mouseleave', () => {
+    const icon = card.querySelector('.service-icon');
+    icon.style.transform = 'scale(1)';
+  });
+});
+  
+</script>
+</body>
+</html>
